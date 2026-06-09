@@ -18,6 +18,11 @@
     <version>7.12.0</version>
     <scope>test</scope>
 </dependency>
+  	<dependency>
+  		<groupId>com.test</groupId>
+  		<artifactId>seleniumpracticeproject</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
