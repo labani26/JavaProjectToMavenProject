@@ -12,40 +12,45 @@ public class LocatorSet {
 
         // Launch Chrome
         WebDriver driver = new ChromeDriver();
-
+        
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        
         // Maximize the browser
         driver.manage().window().maximize();
 
         // Open the website
-        driver.get("https://courses.rahulshettyacademy.com/");
+        driver.get("https://www.facebook.com/");
 
         // Create an explicit wait
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        
 
         // Click the signup/login button
-        wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//*[@id=\"hamburger-menu\"]/li[7]/a")))
-                .click();
+//        wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//*[@id=\"hamburger-menu\"]/li[7]/a")))
+//                .click();
 
         // Wait until the Name field is visible
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
 
 
         // Enter Email
-        driver.findElement(By.id("email"))
+        driver.findElement(By.name("email"))
                 .sendKeys("mail2labanisardar@gmail.com");
 
-        // Click OTP button
-        driver.findElement(By.id("otp-login-btn")).click();
+        
+        driver.findElement(By.name("pass")).sendKeys("123456");
+        
+        driver.findElement(By.className("html-div")).click();
+        
+        System.out.println(driver.findElement(By.linkText("The password you've entered is incorrect")).getText());
+        
+        driver.findElement(By.linkText("Forgotten password?")).click();
+        
+        driver.findElement(By.xpath("//input[@type='text']")).sendKeys("mail2labanisardar@gmail.com");
+        
+        driver.findElement(By.className("x78zum5")).click();
+        
 
-        driver.get("https://mail.google.com/mail/u/0/#inbox");
-        
-        driver.manage().window().maximize();
-        
-        WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
-        
-        driver.findElement(By.className("class=\"J-Ke n0\"")).click();
-        
         
         // Close browser (optional)
         // driver.quit();
