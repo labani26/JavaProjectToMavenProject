@@ -2,9 +2,9 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class LocatorSet {
 
@@ -12,47 +12,169 @@ public class LocatorSet {
 
         // Launch Chrome
         WebDriver driver = new ChromeDriver();
-        
+
+        String Email = "mail2labanisardar@gmail.com";
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        
-        // Maximize the browser
         driver.manage().window().maximize();
 
-        // Open the website
-        driver.get("https://www.facebook.com/");
+        // Open Amazon
+        driver.get("https://www.amazon.in/");
 
-        // Create an explicit wait
-        
+        driver.findElement(By.id("nav-link-accountList-nav-line-1")).click();
 
-        // Click the signup/login button
-//        wait.until(ExpectedConditions.elementToBeClickable(
-//                By.xpath("//*[@id=\"hamburger-menu\"]/li[7]/a")))
-//                .click();
-
-        // Wait until the Name field is visible
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
-
+        driver.findElement(By.className("a-button-input")).click();
 
         // Enter Email
-        driver.findElement(By.name("email"))
-                .sendKeys("mail2labanisardar@gmail.com");
+        driver.findElement(By.id("ap_email_login")).sendKeys(Email);
 
+        driver.findElement(By.xpath("//input[contains(@type,'submit')]")).click();
+
+        // Enter wrong password
+        driver.findElement(By.id("ap_password")).sendKeys("123459");
+
+        driver.findElement(By.id("signInSubmit")).click();
+
+        // Call the method AFTER clicking Sign In
+        String password = getPassword(driver);
+
+        System.out.println(password);
+
+        // Forgot password
+        driver.findElement(By.id("auth-fpp-link-bottom")).click();
+
+        driver.findElement(By.id("ap_email")).sendKeys(Email);
+
+        driver.findElement(By.id("continue")).click();
+
+        // Open Gmail (example only)
+       GmailOpen(driver, Email);
+    }
+
+    public static String getPassword(WebDriver driver) {
+
+        String passwordText =
+                driver.findElement(By.className("a-alert-content")).getText();
+
+        Assert.assertEquals(passwordText, "Your password is incorrect");
+
+        String[] passwordArray = passwordText.split(" ");
+
+        String password = passwordArray[3];
+
+        return password;
+    }
+
+    public static void GmailOpen(WebDriver driver, String Email) {
+
+        driver.switchTo().newWindow(WindowType.TAB);
+
+        driver.get("https://mail.google.com/");
+
+        driver.findElement(By.id("identifierId")).sendKeys(Email);
         
-        driver.findElement(By.name("pass")).sendKeys("123456");
-        
-        driver.findElement(By.className("html-div")).click();
-        
-        System.out.println(driver.findElement(By.linkText("The password you've entered is incorrect")).getText());
-        
-        driver.findElement(By.linkText("Forgotten password?")).click();
-        
-        driver.findElement(By.xpath("//input[@type='text']")).sendKeys("mail2labanisardar@gmail.com");
-        
-        driver.findElement(By.className("x78zum5")).click();
+        driver.findElement(By.xpath(("//div[@class='VfPpkd-RLmnJb']"))).click();
         
 
-        
-        // Close browser (optional)
-        // driver.quit();
+        // You can continue the login flow from here if needed.
     }
 }
+      
+        
+//      Code Download
+//      import java.time.Duration;
+//
+//
+//
+//      import org.openqa.selenium.By;
+//
+//      import org.openqa.selenium.WebDriver;
+//
+//      import org.openqa.selenium.chrome.ChromeDriver;
+//
+//      import org.openqa.selenium.edge.EdgeDriver;
+//
+//      import org.openqa.selenium.firefox.FirefoxDriver;
+//
+//      import org.testng.Assert;
+//
+//
+//      public class Locators2 {
+//
+//      public static void main(String[] args) throws InterruptedException {
+//
+//      // TODO Auto-generated method stub
+//
+//      String name = "rahul";
+//
+//      System.setProperty("webdriver.chrome.driver", "/Users/rahulshetty/Documents/chromedriver");
+//
+//      WebDriver driver = new ChromeDriver();
+//
+//      // System.setProperty("webdriver.edge.driver", "/Users/rahulshetty/Documents/msedgedriver");
+//
+//      // WebDriver driver = new EdgeDriver();
+//
+//      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//
+//      String password = getPassword(driver);
+//
+//      driver.get("https://rahulshettyacademy.com/locatorspractice/");
+//
+//      driver.findElement(By.id("inputUsername")).sendKeys(name);
+//
+//      driver.findElement(By.name("inputPassword")).sendKeys(password);
+//
+//      driver.findElement(By.className("signInBtn")).click();
+//
+//      Thread.sleep(2000);
+//
+//      System.out.println(driver.findElement(By.tagName("p")).getText());
+//
+//      Assert.assertEquals(driver.findElement(By.tagName("p")).getText(), "You are successfully logged in.");
+//
+//      Assert.assertEquals(driver.findElement(By.cssSelector("div[class='login-container'] h2")).getText(),"Hello "+name+",");
+//
+//      driver.findElement(By.xpath("//*[text()='Log Out']")).click();
+//
+//      driver.close();
+//
+//      }
+//
+//      public static String getPassword(WebDriver driver) throws InterruptedException
+//
+//      {
+//
+//      driver.get("https://rahulshettyacademy.com/locatorspractice/");
+//
+//      driver.findElement(By.linkText("Forgot your password?")).click();
+//
+//      Thread.sleep(1000);
+//
+//      driver.findElement(By.cssSelector(".reset-pwd-btn")).click();
+//
+//      String passwordText =driver.findElement(By.cssSelector("form p")).getText();
+//
+//      //Please use temporary password 'rahulshettyacademy' to Login.
+//
+//      String[] passwordArray = passwordText.split("'");
+//
+//      // String[] passwordArray2 = passwordArray[1].split("'");
+//
+//      // passwordArray2[0]
+//
+//      String password = passwordArray[1].split("'")[0];
+//
+//      return password;
+//
+//      //0th index - Please use temporary password
+//
+//      //1st index - rahulshettyacademy' to Login.
+//
+//      //0th index - rahulshettyacademy
+//
+//      //1st index - to Login.
+//
+//      }
+//
+//      }

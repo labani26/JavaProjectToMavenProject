@@ -19,8 +19,13 @@
     <scope>test</scope>
 </dependency>
   	<dependency>
-  		<groupId>com.test</groupId>
-  		<artifactId>seleniumpracticeproject</artifactId>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>7.12.0</version>
+</dependency>
+  	<dependency>
+  		<groupId>exp</groupId>
+  		<artifactId>ProjectMaven2</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
