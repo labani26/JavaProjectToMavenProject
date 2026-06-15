@@ -18,6 +18,9 @@ public class LocatorSet2 {
         driver.navigate().to("https://rahulshettyacademy.com/AutomationPractice/");
         driver.navigate().back();
         driver.navigate().forward();
+        System.out.println(driver.getTitle());
+        System.out.println(driver.getCurrentUrl());
+        
         
 //     driver.get("https://rahulshettyacademy.com/AutomationPractice/");
 //     driver.findElement(By.xpath("//header/div/button[1]/following-sibling::button[1]")).click();
