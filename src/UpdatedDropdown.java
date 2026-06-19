@@ -87,30 +87,24 @@ public class UpdatedDropdown {
         	).click();
 
         
-     // Locate the circle
-        WebElement circle = driver.findElement(
-            By.xpath("//*[local-name()='circle']")
-        );
+        WebElement roundTripCircle = driver.findElement(
+        	    By.xpath("//div[normalize-space()='Round Trip']/preceding::*[local-name()='circle'][1]")
+        	);
 
-        // Print initial stroke
-        System.out.println("Before click: " + circle.getDomAttribute("stroke"));
+        	System.out.println("Before click: " + roundTripCircle.getDomAttribute("stroke"));
 
-        // Click it
-        circle.click();
+        	roundTripCircle.click();
 
-        // Re-locate the element because the DOM may have changed
-        circle = driver.findElement(
-            By.xpath("//*[local-name()='circle']")
-        );
+        	// Re-locate after click
+        	roundTripCircle = driver.findElement(
+        	    By.xpath("//div[normalize-space()='Round Trip']/preceding::*[local-name()='circle'][1]")
+        	);
 
-        // Get the updated stroke value
-        String stroke = circle.getDomAttribute("stroke");
+        	String stroke = roundTripCircle.getDomAttribute("stroke");
 
-        System.out.println("After click: " + stroke);
+        	System.out.println("After click: " + stroke);
 
-        // Verify
-        Assert.assertEquals(stroke, "#F7941D", "Circle is not enabled.");
-        System.out.println("It's enabled.");
+        	Assert.assertEquals(stroke, "#F7941D");
         
         // Search Flights
        driver.findElement(By.cssSelector("[data-testid='home-page-flight-cta']")).click();
