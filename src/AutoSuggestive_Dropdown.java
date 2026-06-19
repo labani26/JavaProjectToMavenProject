@@ -26,6 +26,8 @@ public class AutoSuggestive_Dropdown {
 		
 		for(WebElement option : options) {
 			if(option.getText().equalsIgnoreCase("BASIC"))
+//				Option.getText() → Gets the visible text of the Option web element.
+//				.equalsIgnoreCase("South Africa") → Compares that text with "South Africa" without considering uppercase or lowercase letters.
 			{
 				System.out.println(option.getText());
 				option.click();

@@ -2,7 +2,10 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
 
 
 
@@ -29,6 +32,12 @@ public class UpdatedDropdown {
         
         driver.findElement(By.xpath("//*[text()='MAA']")).click();
         
+        Thread.sleep(2000);
+        
+        //open calender and select current date
+        driver.findElement(
+        	    By.xpath("//div[normalize-space()='19']")
+        	).click();
         
      // Click on the Senior Citizen radio button
         driver.findElement(
@@ -39,18 +48,22 @@ public class UpdatedDropdown {
         System.out.println("Senior Citizen option clicked successfully.");
         	
         //how many circle button are there
-        System.out.println(driver.findElement(By.xpath("//*[local-name()='circle' and @cx='9' and @cy='9' and @r='8']")).getSize());
+        int count = driver.findElements(
+        	    By.xpath("//*[local-name()='circle' and @cx='9' and @cy='9' and @r='8']")
+        	).size();
 
+        System.out.println(count);
+        	
         // Open Travellers
         driver.findElement(
-        	    By.xpath("//div[text()='Passengers']/following::svg[1]")
-        	).click();
+        	    By.xpath("//div[normalize-space()='1 Adult']")).click();
 
         // Add 2 Adults
         int i = 1; 
         while(i<3) { 
         	driver.findElement( By.cssSelector("div[data-testid='Adult-testID-plus-one-cta']") ).click(); 
         i++;
+        break;
         }
         
         // Add 5 Children
@@ -59,17 +72,46 @@ public class UpdatedDropdown {
         	driver.findElement(By.cssSelector("div[data-testid='Children-testID-plus-one-cta']")).click(); 
         	// driver.findElement(By.xpath("//div[@data-testid='Children-testID-plus-one-cta']")).click(); 
         	j++; 
+        	break;
         }
         
         // Add 4 Infants
-        for(int k = 0; k < 4 ; k++) { 
+        for(int k = 0; k < 4; k++) { 
         	driver.findElement(By.xpath("//*[@data-testid='Infant-testID-plus-one-cta']")).click();
+        	break;
         	}
-
+        
         // Done
-        driver.findElement(By.cssSelector("[data-testid='home-page-travellers-done-cta']"))
-        .click();
+        driver.findElement(
+        	    By.cssSelector("[data-testid='home-page-travellers-done-cta']")
+        	).click();
 
+        
+     // Locate the circle
+        WebElement circle = driver.findElement(
+            By.xpath("//*[local-name()='circle']")
+        );
+
+        // Print initial stroke
+        System.out.println("Before click: " + circle.getDomAttribute("stroke"));
+
+        // Click it
+        circle.click();
+
+        // Re-locate the element because the DOM may have changed
+        circle = driver.findElement(
+            By.xpath("//*[local-name()='circle']")
+        );
+
+        // Get the updated stroke value
+        String stroke = circle.getDomAttribute("stroke");
+
+        System.out.println("After click: " + stroke);
+
+        // Verify
+        Assert.assertEquals(stroke, "#F7941D", "Circle is not enabled.");
+        System.out.println("It's enabled.");
+        
         // Search Flights
        driver.findElement(By.cssSelector("[data-testid='home-page-flight-cta']")).click();
     }
