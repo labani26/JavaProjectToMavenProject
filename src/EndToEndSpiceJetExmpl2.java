@@ -3,13 +3,15 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
+//import org.testng.Assert;
 
-public class EndToEndSpiceJetAutomation {
 
-    public static void main(String[] args) throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver();
+public class EndToEndSpiceJetExmpl2 {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		WebDriver driver = new ChromeDriver();
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -28,11 +30,11 @@ public class EndToEndSpiceJetAutomation {
 
         Thread.sleep(2000);
 
-//        // One Way
-//        driver.findElement(
-//                By.xpath("//div[@data-testid='one-way-radio-button']"))
-//                .click();
-        
+        // One Way
+        driver.findElement(
+                By.xpath("//div[@data-testid='one-way-radio-button']"))
+                .click();
+
         // Departure Date
         driver.findElement(By.xpath("//div[.//div[text()='Select Date']]//*[name()='svg']")).click();
         
@@ -41,25 +43,24 @@ public class EndToEndSpiceJetAutomation {
         	);
 
         // Verify Return Date status
-        boolean status = driver.findElement(
-                By.xpath("//div[.//div[text()='Select Date']]"))
-                .isEnabled();
+//        boolean status = driver.findElement(
+//                By.xpath("//div[.//div[text()='Select Date']]"))
+//                .isEnabled();
+//
+//        if (status) {
+//            System.out.println("Return Date Enabled");
+//            Assert.assertTrue(true);
+//            
+//        } else {
+//            System.out.println("Return Date Disabled");
+//            Assert.assertFalse(false);
+//        }
 
-        if (status) {
-            System.out.println("Return Date Enabled");
-            Assert.assertTrue(true);
-            
-        } else {
-            System.out.println("Return Date Disabled");
-            Assert.assertFalse(false);
-        }
-
-        // Senior Citizen
-        driver.findElement(
-                By.xpath("(//*[local-name()='circle' and @cx='9' and @cy='9' and @r='8'])[2]"))
-                .click();
-
-        System.out.println("Senior Citizen option clicked successfully.");
+        // Family and Friends
+//        driver.findElement(
+//                By.xpath("//div[text()='Family & Friends']"));
+//
+//        System.out.println("Senior Citizen option clicked successfully.");
 
         // Count radio buttons
         int count = driver.findElements(
@@ -104,11 +105,16 @@ public class EndToEndSpiceJetAutomation {
                 .click();
 
         Thread.sleep(2000);
-
+        
+        //search
+        
         driver.findElement(
         	    By.xpath("//div[@class='css-1dbjc4n r-1awozwy r-z2wwpe r-1loqt21 r-18u37iz r-1777fci r-d9fdf6 r-1w50u8q r-ah5dr5 r-1otgn73']")
         	).click();
 
         	System.out.println("Clicked on Search");
-    }
+       // driver.quit();
+
+	}
+
 }
