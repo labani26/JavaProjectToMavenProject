@@ -16,6 +16,8 @@ public class AddToCartConcept {
 		// TODO Auto-generated method stub
 
 		WebDriver driver = new ChromeDriver();
+		//ChromeDriver is class implimenting WebDriver interface
+		
 		driver.manage().window().maximize();
 		
 		//implicit wait
