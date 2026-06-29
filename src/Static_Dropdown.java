@@ -25,7 +25,7 @@ public class Static_Dropdown {
 		dropdown.selectByContainsVisibleText("AED");
 		
 		System.out.println(dropdown.getFirstSelectedOption().getText());
-		
+
 		dropdown.selectByIndex(3);
 
 		System.out.println(dropdown.getFirstSelectedOption().getText());
