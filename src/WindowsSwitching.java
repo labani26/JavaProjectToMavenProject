@@ -38,7 +38,7 @@ public class WindowsSwitching {
         // Get the paragraph text
         String text = driver.findElement(By.cssSelector(".im-para.red")).getText();
 
-        System.out.println("Full Text:"+text);
+        System.out.println("Full Text: "+text);
 
         // Extract email
         String email = text.split("at")[1].trim().split(" ")[0];
