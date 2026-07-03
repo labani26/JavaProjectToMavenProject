@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 public class Calender_Automate {
 
@@ -13,6 +14,7 @@ public class Calender_Automate {
 		String Date = "15";
 		String Month = "6";
 		String Year = "2027";
+		String[] Expectedlist = {Month,Date, Year};
 		
 		WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -50,8 +52,17 @@ public class Calender_Automate {
         	}
         }
         
-        System.out.println("Date :"+Date+"/"+Month+"/"+Year);        
-        ;
+        System.out.println("Date :"+Date+"/"+Month+"/"+Year);     
+        
+        List<WebElement> ActualList = driver.findElements(By.cssSelector(".react-date-picker__inputGroup__input"));
+        
+        for(int i = 0; i<ActualList.size(); i++) {
+        	 
+            System.out.println(ActualList.get(i).getAttribute("value"));
+            Assert.assertEquals(ActualList.get(i).getAttribute("value"), Expectedlist[i]);
+        }
+       
+        driver.close();;
 	}
-
+        
 }
