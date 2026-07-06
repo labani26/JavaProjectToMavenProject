@@ -71,6 +71,9 @@ public class HandlingHTTPS {
         // Chrome
         WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
+        driver.manage().deleteAllCookies();
+//        driver.manage().deleteCookieNamed("xyz");
+//        driver.manage().addCookie("xyz");
         driver.get("https://expired.badssl.com/");
         System.out.println("Chrome Title : " + driver.getTitle());
 
