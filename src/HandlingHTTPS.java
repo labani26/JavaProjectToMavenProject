@@ -1,7 +1,12 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Proxy;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,7 +17,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class HandlingHTTPS {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 
         // Chrome Options
         ChromeOptions options = new ChromeOptions();
@@ -52,7 +57,7 @@ public class HandlingHTTPS {
         Map<String, Object> prefs = new HashMap<>();
         //A Map stores key-value pairs.
         
-        prefs.put("download.default_directory", "C:\\Downloads");
+        prefs.put("download.default_directory", "C:\\Users\\Labani sardar\\Downloads\\Automation_testin_material");
         //prefs - Put a setting into prefs.
         //"download.default_directory" - means "Download Folder".
         //"C:\\Downloads"- means "Set the download folder to C:\Downloads."
@@ -76,7 +81,17 @@ public class HandlingHTTPS {
 //        driver.manage().addCookie("xyz");
         driver.get("https://expired.badssl.com/");
         System.out.println("Chrome Title : " + driver.getTitle());
-
+        
+        //take screen shots
+        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+       //getScreenshotAs() → Takes the screenshot.
+       // src → Temporary screenshot.
+        //save it to this file
+        FileUtils.copyFile(src, new File("C:\\Users\\Labani sardar\\Downloads\\Automation_testin_material\\screnshot.png"));
+       //FileUtils is a utility class from Apache Commons IO.
+       //copyFile() means:
+      //Copy one file from one location to another, Copy the temporary screenshot (src) to this permanent location and name it screenshot.png.
+        
         Thread.sleep(2000);
 
         // Firefox
