@@ -46,7 +46,6 @@ public class AllLinkStatusCheck {
 }
 
 
-//
 //Code download -
 //package tests;
 //
