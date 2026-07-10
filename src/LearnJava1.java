@@ -1,54 +1,90 @@
 import java.util.ArrayList;
-
-import org.apache.poi.ss.formula.functions.Now;
+import java.util.stream.Stream;
 
 public class LearnJava1 {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+    public static void main(String[] args) {
 
-		ArrayList<String> names = new ArrayList<String>();
-		names.add("Gablu");
-		names.add("hablu");
-		names.add("habibi");
-		names.add("lali");
-		names.add("pili");
-		names.add("halulu");
-		
-		int count = 0;
-		
-		for(int i = 0; i<names.size(); i++) {
-			//i < names.size() → Continue until the last index.
+        ArrayList<String> names = new ArrayList<>();
+
+        names.add("Gablu");
+        names.add("hablu");
+        names.add("habibi");
+        names.add("lali");
+        names.add("pili");
+        names.add("halulu");
+
+        int count = 0;
+
+        // Count names starting with 'h' using a for loop
+        for (int i = 0; i < names.size(); i++) {
+
+            String actual = names.get(i);
+
+            if (actual.startsWith("h")) {
+                count++;
+            }
+        }
+
+        System.out.println("Count = " + count);
+
+        // Call the methods
+        StreamFilter();
+        StreamOfExample();
+    }
+
+    // Stream API Example
+    public static void StreamFilter() {
+
+        ArrayList<String> name = new ArrayList<>();
+
+        name.add("kopi");
+        name.add("popiilll");
+        name.add("nopi");
+        name.add("poli");
+        name.add("tupiiiii");
+
+        // Count strings starting with 'p'
+        long display = name.stream()
+                           .filter(check -> check.startsWith("p"))
+                           .count();
+
+        System.out.println("Strings starting with p = " + display);
+
+        // Print the first string whose length is greater than 4
+        name.stream()
+            .filter(check -> check.length() > 4)
+            .limit(1)
+            .forEach(System.out::println);
+        //forEach() means: "Do something with each element in the stream."
+        
+        
+        // Equivalent using a for loop
+        for (int i = 0; i < name.size(); i++) {  	
+        	//i < names.size() → Continue until the last index.
 			//names.get(i) means: Get the element stored at index i.
-			String Actual = names.get(i);
-			if(Actual.startsWith("h")) {
-				
-				count++;
-				
-			}
-		}
-		System.out.println(count);
-	}
 
+            if (name.get(i).length() > 4) {
+
+                System.out.println("Using for loop: " + name.get(i));
+                
+            }
+        }
+    }
+
+    // Stream.of() Example
+    public static void StreamOfExample() {
+
+        long data = Stream.of(
+                "Alipta",
+                "Balipta",
+                "Salipta",
+                "Nulipta",
+                "Alupi",
+                "Auli")
+                .filter(check -> check.startsWith("A"))
+                .count();
+
+        System.out.println("Strings starting with A = " + data);
+    }
 }
-  
-   
-   public void StreamFilter() {
-	   
-	   ArrayList<String> Name = new ArrayList<String>();
-	   
-	   Name.add("kopi");
-	   Name.add("popi");
-	   Name.add("nopi");
-	   Name.add("poli");
-	   Name.add("tupi");
-	   
-	   Long Display = Name.stream().filter(check -> check.startsWith("p")).count();
-	   //stream = collection of string
-	   //Long is a wrapper class in Java. It is the object version of the primitive data type long.
-	   //long	Primitive data type	long a = 10;  Long	Wrapper class (Object)	Long b = 10L;
-	   //Long - A wrapper class in Java is a class that wraps (converts) a primitive data type(like int, long, double) into an object(Student s1 = new Student();).
-	   System.out.println(Display);
-	   
-   }
-
