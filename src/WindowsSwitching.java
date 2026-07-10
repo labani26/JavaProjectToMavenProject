@@ -42,7 +42,7 @@ public class WindowsSwitching {
 
         // Extract email
         String email = text.split("at")[1].trim().split(" ")[0];
-
+        
         System.out.println("Extracted Email: " + email);
 
         // Switch back to Parent Window

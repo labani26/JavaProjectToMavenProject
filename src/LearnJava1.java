@@ -1,5 +1,9 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
+
+import org.testng.Assert;
 
 public class LearnJava1 {
 
@@ -16,7 +20,7 @@ public class LearnJava1 {
 
         int count = 0;
 
-        // Count names starting with 'h' using a for loop
+        // Count names starting with 'h'
         for (int i = 0; i < names.size(); i++) {
 
             String actual = names.get(i);
@@ -28,9 +32,9 @@ public class LearnJava1 {
 
         System.out.println("Count = " + count);
 
-        // Call the methods
         StreamFilter();
         StreamOfExample();
+        SteamUpperCase();
     }
 
     // Stream API Example
@@ -44,30 +48,24 @@ public class LearnJava1 {
         name.add("poli");
         name.add("tupiiiii");
 
-        // Count strings starting with 'p'
+        // Count strings starting with p
         long display = name.stream()
-                           .filter(check -> check.startsWith("p"))
-                           .count();
+                .filter(check -> check.startsWith("p"))
+                .count();
 
         System.out.println("Strings starting with p = " + display);
 
-        // Print the first string whose length is greater than 4
+        // First string whose length is greater than 4
         name.stream()
-            .filter(check -> check.length() > 4)
-            .limit(1)
-            .forEach(System.out::println);
-        //forEach() means: "Do something with each element in the stream."
-        
-        
-        // Equivalent using a for loop
-        for (int i = 0; i < name.size(); i++) {  	
-        	//i < names.size() → Continue until the last index.
-			//names.get(i) means: Get the element stored at index i.
+                .filter(check -> check.length() > 4)
+                .limit(1)
+                .forEach(System.out::println);
+
+        // Equivalent using for loop
+        for (int i = 0; i < name.size(); i++) {
 
             if (name.get(i).length() > 4) {
-
                 System.out.println("Using for loop: " + name.get(i));
-                
             }
         }
     }
@@ -86,5 +84,51 @@ public class LearnJava1 {
                 .count();
 
         System.out.println("Strings starting with A = " + data);
+    }
+
+    // Map, Sorted, Concat and anyMatch Example
+    public static void SteamUpperCase() {
+
+        // Convert to Uppercase
+        Stream.of("Apple", "Barka Apple", "Chotka Apple", "Dosarka apple", "Ek aur Apple")
+                .filter(check -> check.endsWith("e"))
+                .map(check -> check.toUpperCase())
+                .forEach(System.out::println);
+
+        System.out.println("-------------------------");
+
+        List<String> storesData = Arrays.asList(
+                "hkjgf",
+                "jvjhhgf",
+                "iouuty",
+                "ewtrdhf",
+                "pkjhjv");
+
+        // Sort and convert to uppercase
+        storesData.stream()
+                .filter(check -> check.endsWith("f"))
+                .sorted()
+                .map(check -> check.toUpperCase())
+                .forEach(System.out::println);
+
+        System.out.println("-------------------------");
+
+        // Merge two streams
+        Stream<String> stream1 = Stream.of(
+                "Apple",
+                "Barka Apple",
+                "Chotka Apple",
+                "Dosarka apple",
+                "Ek aur Apple");
+
+        Stream<String> stream2 = storesData.stream();
+
+        Stream<String> streamConcat = Stream.concat(stream1, stream2);
+
+        boolean flag = streamConcat.anyMatch(check -> check.equalsIgnoreCase("Apple"));
+
+        Assert.assertTrue(flag);
+
+        System.out.println("Apple Present? " + flag);
     }
 }
