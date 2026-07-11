@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.testng.Assert;
@@ -35,6 +36,7 @@ public class LearnJava1 {
         StreamFilter();
         StreamOfExample();
         StreamUpperCase();
+        StreamCollector();
     }
 
     // Stream Filter Example
@@ -133,12 +135,13 @@ public class LearnJava1 {
                 .forEach(check -> System.out.println(check));
 
         System.out.println("-------------------------");
-
-        // Create a NEW stream because streams cannot be reused
+// Create a NEW stream because streams cannot be reused
         
 //        Stream<String> - This does not store data like a collection.
 //                         It is a pipeline that processes data.
 //                         There is no .stream() method because it is already a stream.
+        
+// Stream does not store elements in a way that lets you access them by index. 
         
         Stream<String> data1 = Stream.of(
                 "Apple",
@@ -154,6 +157,48 @@ public class LearnJava1 {
         Assert.assertTrue(flag);
 
         System.out.println("Apple Present? " + flag);
+        System.out.println("-------------------------");
+    }
+    
+    public static void StreamCollector() {
+    	
+    Stream<String> data2 = Stream.of(
+    		"hgAFXHG",
+    		"KJDCHJASMC",
+    		"JHxbzkjaxoai",
+    		"asjgxKXHKA",
+    		"POUPIHCS");
+    
+   
+	data2.filter(check -> check.endsWith("i")).map(check->check.toUpperCase())
+	.collect(Collectors.toList())
+   .forEach(check ->System.out.println(check));
+	System.out.println("-------------------------");
+	
+	List<String> data3 = Arrays.asList(
+            "hkjgf",
+            "jvjhhgf",
+            "iouuty",
+            "ewtrdhf",
+            "pkjhjv");
+	
+	List<String> result = data3.stream().filter(check -> check.endsWith("f")).map(check->check.toUpperCase())
+	.sorted().collect(Collectors.toList());
+	System.out.println(result + result.get(2));
+	
+//collect(Collectors.toList()) - It takes all the elements from a Stream and stores them into a List.
+	
+	System.out.println("-------------------------");
+	
+	
+	List<String> data4 = Stream.of("hkjgf","jvjhhgf","iouuty","ewtrdhf","pkjhjv")
+			.filter(check -> check.endsWith("f"))
+			.sorted()
+			.map(check->check.toUpperCase())
+			.collect(Collectors.toList());
+	System.out.println(data4.get(2));
+			
+    
     }
 }
 
