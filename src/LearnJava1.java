@@ -198,6 +198,11 @@ public class LearnJava1 {
 			.collect(Collectors.toList());
 	System.out.println(data4.get(2));
 			
+	
+	List<Integer> values1 = Arrays.asList(4,4,36,6,6,8,9);
+	
+	List<Integer> result1 = values1.stream().distinct().sorted().collect(Collectors.toList());
+	System.out.println(result1);
     
     }
 }
