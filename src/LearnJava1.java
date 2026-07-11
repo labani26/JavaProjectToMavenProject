@@ -9,6 +9,9 @@ public class LearnJava1 {
 
     public static void main(String[] args) {
 
+ //   	ArrayList<String> - It is a class that implements List.
+  //                     It behaves exactly like a List regarding streams.
+    	
         ArrayList<String> names = new ArrayList<>();
 
         names.add("Gablu");
@@ -21,10 +24,7 @@ public class LearnJava1 {
         int count = 0;
 
         // Count names starting with 'h'
-        for (int i = 0; i < names.size(); i++) {
-
-            String actual = names.get(i);
-
+        for (String actual : names) {
             if (actual.startsWith("h")) {
                 count++;
             }
@@ -34,10 +34,10 @@ public class LearnJava1 {
 
         StreamFilter();
         StreamOfExample();
-        SteamUpperCase();
+        StreamUpperCase();
     }
 
-    // Stream API Example
+    // Stream Filter Example
     public static void StreamFilter() {
 
         ArrayList<String> name = new ArrayList<>();
@@ -59,13 +59,13 @@ public class LearnJava1 {
         name.stream()
                 .filter(check -> check.length() > 4)
                 .limit(1)
-                .forEach(System.out::println);
+                .forEach(check -> System.out.println(check));
 
-        // Equivalent using for loop
-        for (int i = 0; i < name.size(); i++) {
-
-            if (name.get(i).length() > 4) {
-                System.out.println("Using for loop: " + name.get(i));
+        // Using for loop
+        for (String s : name) {
+            if (s.length() > 4) {
+                System.out.println("Using for loop: " + s);
+                
             }
         }
     }
@@ -73,6 +73,7 @@ public class LearnJava1 {
     // Stream.of() Example
     public static void StreamOfExample() {
 
+    	//long can store much bigger number then int
         long data = Stream.of(
                 "Alipta",
                 "Balipta",
@@ -87,16 +88,36 @@ public class LearnJava1 {
     }
 
     // Map, Sorted, Concat and anyMatch Example
-    public static void SteamUpperCase() {
+    public static void StreamUpperCase() {
 
         // Convert to Uppercase
-        Stream.of("Apple", "Barka Apple", "Chotka Apple", "Dosarka apple", "Ek aur Apple")
-                .filter(check -> check.endsWith("e"))
-                .map(check -> check.toUpperCase())
-                .forEach(System.out::println);
+    	
+//    	Stream<String> - This does not store data like a collection.
+//          It is a pipeline that processes data.
+//          There is no .stream() method because it is already a stream.   	
+        Stream<String> data = Stream.of(
+                "Apple",
+                "Barka Apple",
+                "Chotka Apple",
+                "Dosarka apple",
+                "Ek aur Apple");
+        
+//        data type	Use
+//        List<String> data	data.stream() ✅
+//        ArrayList<String> data	data.stream() ✅
+//        Set<String> data	data.stream() ✅
+//        Stream<String> data	data (not data.stream()) ✅
+        
+//        data.forEach(System.out::println);   // Stream is consumed
+//        Stream.concat(storesData.stream(), data); // ❌ IllegalStateException
 
+        data.filter(check -> check.endsWith("e"))
+        .map(check -> check.toUpperCase())
+        .forEach(check -> System.out.println(check));
         System.out.println("-------------------------");
 
+        //List<String> - Stores elements in memory. Can access elements multiple times. Has a .stream() method.
+        
         List<String> storesData = Arrays.asList(
                 "hkjgf",
                 "jvjhhgf",
@@ -109,21 +130,24 @@ public class LearnJava1 {
                 .filter(check -> check.endsWith("f"))
                 .sorted()
                 .map(check -> check.toUpperCase())
-                .forEach(System.out::println);
+                .forEach(check -> System.out.println(check));
 
         System.out.println("-------------------------");
 
-        // Merge two streams
-        Stream<String> stream1 = Stream.of(
+        // Create a NEW stream because streams cannot be reused
+        
+//        Stream<String> - This does not store data like a collection.
+//                         It is a pipeline that processes data.
+//                         There is no .stream() method because it is already a stream.
+        
+        Stream<String> data1 = Stream.of(
                 "Apple",
                 "Barka Apple",
                 "Chotka Apple",
                 "Dosarka apple",
                 "Ek aur Apple");
 
-        Stream<String> stream2 = storesData.stream();
-
-        Stream<String> streamConcat = Stream.concat(stream1, stream2);
+        Stream<String> streamConcat = Stream.concat(storesData.stream(), data1);
 
         boolean flag = streamConcat.anyMatch(check -> check.equalsIgnoreCase("Apple"));
 
@@ -132,3 +156,15 @@ public class LearnJava1 {
         System.out.println("Apple Present? " + flag);
     }
 }
+
+//Set<String>
+//A Set also stores data.
+//
+//Difference from List:
+//
+//Doesn't allow duplicate values.
+//Order is not guaranteed (for HashSet).
+//
+//It also has .stream().
+//
+//data.stream().forEach(System.out::println);
