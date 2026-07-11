@@ -203,6 +203,7 @@ public class LearnJava1 {
 	
 	List<Integer> result1 = values1.stream().distinct().sorted().collect(Collectors.toList());
 	System.out.println(result1);
+	System.out.println(result1.get(2));
     
     }
 }
