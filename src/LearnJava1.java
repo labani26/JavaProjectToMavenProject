@@ -219,3 +219,15 @@ public class LearnJava1 {
 //It also has .stream().
 //
 //data.stream().forEach(System.out::println);
+
+//data2.stream()
+//.filter(check -> check.endsWith("i"))
+//.map(check -> check.toUpperCase())
+//.collect(Collectors.toList())
+//.forEach(System.out::println);
+//
+//Here:
+//
+//collect(Collectors.toList()) returns a List<String>.
+//Then forEach() prints each element.
+//You are not storing the result of forEach().
