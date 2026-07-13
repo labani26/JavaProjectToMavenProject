@@ -1,0 +1,40 @@
+import java.util.List;
+//import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+public class FilterOnPages {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+        
+        driver.findElement(By.id("search-field")).sendKeys("Tomato");
+        
+        List<WebElement> TableRows = driver.findElements(By.xpath("//tr/td[1]"));
+        
+        List<String> FilteredData = TableRows.stream().filter(check -> check.getText().contains("Tomato"))
+        		.map(check->check.getText()).collect(Collectors.toList());
+          
+        Assert.assertEquals(TableRows.size(), FilteredData.size());
+        
+        //filter() doesn't change the data type.
+       // map() changes the data type - It changes each WebElement into a String.
+        
+        FilteredData.forEach(check->System.out.println(check));
+        
+      //  FilteredData.forEach(check -> System.out.println(check.getText()));
+      
+
+	}
+
+}
