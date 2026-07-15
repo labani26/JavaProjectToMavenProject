@@ -17,6 +17,8 @@ public class RealRellativeLocator {
         
         WebElement nameEditBox = driver.findElement(By.cssSelector("[name='name']"));
         
+        nameEditBox.sendKeys("Labani Sardar");
+        
       WebElement Above = driver.findElement(with(By.tagName("label")).above(nameEditBox));
       
       System.out.println(Above.getText());
@@ -36,6 +38,7 @@ public class RealRellativeLocator {
 
       System.out.println(driver.findElement(with(By.tagName("label")).toRightOf(RadioButton)).getText());
       
+      driver.quit();
       
 	}
 
