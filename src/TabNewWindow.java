@@ -1,20 +1,28 @@
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TabNewWindow {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 
 		WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
         driver.get("https://rahulshettyacademy.com/angularpractice/");
+        
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         
         driver.switchTo().newWindow(WindowType.TAB);
         //Selenium automatically switches to Tab 2.
@@ -43,12 +51,30 @@ public class TabNewWindow {
         
         driver.switchTo().window(ParantWindowId);
         
-        driver.findElement(By.cssSelector("[name*='name']")).sendKeys(CourseName);
+        WebElement name = driver.findElement(By.cssSelector("[name*='name']"));
+        
+        name.sendKeys(CourseName);
+        
+        File file = name.getScreenshotAs(OutputType.FILE);
+        //OutputType.FILE - Give me the screenshot as a File.Return the screenshot as a File object.
+        
+     //   FileUtils.copyFile(file,new File("src/logo.png"));
+        
+//        FileUtils → is a utility class from the Apache Commons IO library that provides ready-made methods for working with files and directories.
+//        It saves you from writing a lot of boilerplate Java code.
+//       Instead of writing many lines to copy, move, or delete files using Java streams, you can call a single method.
+        
+//        copyFile() → A method that copies one file to another.
+//        file → The source File object (the file you want to copy).
+//        new File("logo.png") → Creates a File object representing the destination file named logo.png.
+        File destination = new File("src/logo.png");
+        
+        FileUtils.copyFile(file, destination);
+        
+        System.out.println(destination.getAbsolutePath());
+        
         
         driver.quit();
-        
-       
-        
 	}
 
 }
