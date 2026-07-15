@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 public class TabNewWindow {
 
@@ -73,8 +74,18 @@ public class TabNewWindow {
         
         System.out.println(destination.getAbsolutePath());
         
+//        
+//        driver.quit();
         
-        driver.quit();
+        int Height = name.getRect().getDimension().getHeight();
+        System.out.println(Height);
+        //System.out.println - return vois
+        
+        int Width = name.getRect().getDimension().getWidth();
+        System.out.println(Width);
+        
+//        Assert.assertEquals(Height, Width);
+        
 	}
 
 }
